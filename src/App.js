@@ -1,14 +1,31 @@
 import { useState } from 'react'
 import './index.css';
 
-function BreakSelector({breakLen}) {
+function BreakSelector({breakLen, setBreakLen}) {
+
+  function breakHandleClick(e) {
+    switch(e.target.id){
+      case "break-increment":
+        if(breakLen<60){
+          setBreakLen(breakLen + 1)
+        }
+        break;
+      case "break-decrement":
+        if(breakLen>0){
+          setBreakLen(breakLen - 1)
+        }
+        break;
+      default:
+        break;
+    }
+  }
 
   return (
     <div id="BreakSelector" className='selectors'>
       <div id="break-label">Break Length</div>
       <span id="break-length">{breakLen}</span>
-      <button id="break-increment">up</button>
-      <button id="break-decrement">down</button>
+      <button id="break-increment" onClick={breakHandleClick}>up</button>
+      <button id="break-decrement" onClick={breakHandleClick}>down</button>
     </div>
   )
 }
@@ -16,25 +33,29 @@ function BreakSelector({breakLen}) {
 function SessionSelector({sessionLen, setSessionLen}) {
 
   function sessionHandleClick(e) {
-    switch("e.target.id"){
+    switch(e.target.id){
       case "session-increment":
-        setSessionLen(sessionLen + 1)
+        if(sessionLen<60){
+          setSessionLen(sessionLen + 1)
+        }
         break;
       case "session-decrement":
-        setSessionLen(sessionLen - 1)
+        if(sessionLen>0){
+          setSessionLen(sessionLen - 1)
+        }
         break;
       default:
         break;
     }
-    
   }
+
 
   return (
     <div id="SessionSelector" className='selectors'>
       <div id="session-label">session Length</div>
       <span id="session-length">{sessionLen}</span>
-      <button id="session-increment" onClick={sessionHandleClick()}>up</button>
-      <button id="session-decrement" onClick={sessionHandleClick()}>down</button>
+      <button id="session-increment" onClick={sessionHandleClick}>up</button>
+      <button id="session-decrement" onClick={sessionHandleClick}>down</button>
     </div>
   )
 }
@@ -61,7 +82,7 @@ function App() {
     <div className="App">
       <header>productivity clock</header>
       <SessionSelector sessionLen={sessionLen} setSessionLen={setSessionLen}/>
-      <BreakSelector breakLen={breakLen}/>
+      <BreakSelector breakLen={breakLen} setBreakLen={setBreakLen}/>
       <MainDisplay sessionLen={sessionLen} breakLen={breakLen} />
     </div>
   );
