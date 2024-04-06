@@ -49,7 +49,6 @@ function SessionSelector({sessionLen, setSessionLen}) {
     }
   }
 
-
   return (
     <div id="SessionSelector" className='selectors'>
       <div id="session-label">session Length</div>
@@ -60,12 +59,19 @@ function SessionSelector({sessionLen, setSessionLen}) {
   )
 }
 
-function MainDisplay({sessionLen, breakLen}) {
+function MainDisplay({sessionLen, breakLen, countdown, setCountdown}) {
+
+  function renderSecond(){
+    setCountdown(countdown-1)
+  }
+  //setInterval(renderSecond(), 1000)
 
   return (
     <div id="mainDisplay">
       <div id="timer-label">Session</div>
-      <div id="time-left">00:00</div>
+      <div id="time-left">{
+        Math.floor(countdown/60).toString().padStart(2,0) + ":" + (countdown%60).toString().padStart(2,0)
+      }</div>
       <button id="start_stop">Start/Stop</button>
       <button id="reset">reset</button>
     </div>
@@ -75,15 +81,14 @@ function MainDisplay({sessionLen, breakLen}) {
 function App() {
   const [sessionLen, setSessionLen] = useState(25);
   const [breakLen, setBreakLen] = useState(5);
-  
-  
+  const [countdown, setCountdown] = useState(185)
 
   return (
     <div className="App">
       <header>productivity clock</header>
       <SessionSelector sessionLen={sessionLen} setSessionLen={setSessionLen}/>
       <BreakSelector breakLen={breakLen} setBreakLen={setBreakLen}/>
-      <MainDisplay sessionLen={sessionLen} breakLen={breakLen} />
+      <MainDisplay sessionLen={sessionLen} breakLen={breakLen} countdown={countdown} setCountdown={setCountdown}/>
     </div>
   );
 }
