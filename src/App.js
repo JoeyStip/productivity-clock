@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './index.css';
+import { useEffect } from 'react'
 
 function BreakSelector({breakLen, setBreakLen}) {
 
@@ -60,11 +61,18 @@ function SessionSelector({sessionLen, setSessionLen}) {
 }
 
 function MainDisplay({sessionLen, breakLen, countdown, setCountdown}) {
+  
+  let paused = true
 
-  function renderSecond(){
-    setCountdown(countdown-1)
-  }
-  //setInterval(renderSecond(), 1000)
+  useEffect(()=>{
+    setInterval(()=> {
+      if(!paused){setCountdown((count) => count-1)}
+    }, 1000)
+  })
+
+  const playPause = () => {
+    paused = !paused
+  };
 
   return (
     <div id="mainDisplay">
@@ -72,7 +80,7 @@ function MainDisplay({sessionLen, breakLen, countdown, setCountdown}) {
       <div id="time-left">{
         Math.floor(countdown/60).toString().padStart(2,0) + ":" + (countdown%60).toString().padStart(2,0)
       }</div>
-      <button id="start_stop">Start/Stop</button>
+      <button id="start_stop" onClick={playPause}>Start/Stop</button>
       <button id="reset">reset</button>
     </div>
   );
@@ -81,7 +89,7 @@ function MainDisplay({sessionLen, breakLen, countdown, setCountdown}) {
 function App() {
   const [sessionLen, setSessionLen] = useState(25);
   const [breakLen, setBreakLen] = useState(5);
-  const [countdown, setCountdown] = useState(185)
+  const [countdown, setCountdown] = useState(250)
 
   return (
     <div className="App">
