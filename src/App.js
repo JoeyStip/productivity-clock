@@ -62,7 +62,7 @@ function SessionSelector({sessionLen, setSessionLen}) {
 
 let paused = true
 
-function MainDisplay({sessionLen, breakLen, countdown, setCountdown, workOrBreak, setworkOrBreak}) {
+function MainDisplay({setSessionLen, sessionLen, setBreakLen, breakLen, countdown, setCountdown, workOrBreak, setworkOrBreak}) {
   
   useEffect(()=>{
     const interval = setInterval(()=> {
@@ -87,7 +87,9 @@ function MainDisplay({sessionLen, breakLen, countdown, setCountdown, workOrBreak
   };
   
   const reset = () => {
-    setCountdown(sessionLen*60)
+    setSessionLen(25)
+    setBreakLen(5)
+    setCountdown(25*60)
     paused = true
   }
 
@@ -114,7 +116,7 @@ function App() {
       <header>productivity clock</header>
       <SessionSelector sessionLen={sessionLen} setSessionLen={setSessionLen}/>
       <BreakSelector breakLen={breakLen} setBreakLen={setBreakLen}/>
-      <MainDisplay sessionLen={sessionLen} breakLen={breakLen} countdown={countdown} setCountdown={setCountdown} workOrBreak={workOrBreak} setworkOrBreak={setworkOrBreak}/>
+      <MainDisplay sessionLen={sessionLen} setSessionLen={setSessionLen} breakLen={breakLen} setBreakLen={setBreakLen} countdown={countdown} setCountdown={setCountdown} workOrBreak={workOrBreak} setworkOrBreak={setworkOrBreak}/>
     </div>
   );
 }
