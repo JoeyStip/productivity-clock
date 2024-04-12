@@ -12,7 +12,7 @@ function BreakSelector({breakLen, setBreakLen}) {
         }
         break;
       case "break-decrement":
-        if(breakLen>0){
+        if(breakLen>1){
           setBreakLen(breakLen - 1)
         }
         break;
@@ -41,7 +41,7 @@ function SessionSelector({sessionLen, setSessionLen}) {
         }
         break;
       case "session-decrement":
-        if(sessionLen>0){
+        if(sessionLen>1){
           setSessionLen(sessionLen - 1)
         }
         break;
@@ -52,7 +52,7 @@ function SessionSelector({sessionLen, setSessionLen}) {
 
   return (
     <div id="SessionSelector" className='selectors'>
-      <div id="session-label">session Length</div>
+      <div id="session-label">Session Length</div>
       <span id="session-length">{sessionLen}</span>
       <button id="session-increment" onClick={sessionHandleClick}>up</button>
       <button id="session-decrement" onClick={sessionHandleClick}>down</button>
@@ -60,19 +60,36 @@ function SessionSelector({sessionLen, setSessionLen}) {
   )
 }
 
-function MainDisplay({sessionLen, breakLen, countdown, setCountdown}) {
-  
-  let paused = true
+let paused = true
 
+function MainDisplay({sessionLen, breakLen, countdown, setCountdown, workOrBreak, setworkOrBreak}) {
+  
   useEffect(()=>{
-    setInterval(()=> {
-      if(!paused){setCountdown((count) => count-1)}
+    const interval = setInterval(()=> {
+      if(!paused){
+        if(countdown===0){
+          if(workOrBreak==="W"){
+            setCountdown(breakLen*60)
+            setworkOrBreak("B")
+          } else {
+            setCountdown(sessionLen*60)
+            setworkOrBreak("W")
+          }
+        }
+        setCountdown((count) => count-1)
+      }
     }, 1000)
-  })
+    return () => clearInterval(interval)
+  }, [setCountdown, countdown, breakLen, sessionLen, workOrBreak, setworkOrBreak]);
 
   const playPause = () => {
     paused = !paused
   };
+  
+  const reset = () => {
+    setCountdown(sessionLen*60)
+    paused = true
+  }
 
   return (
     <div id="mainDisplay">
@@ -81,7 +98,7 @@ function MainDisplay({sessionLen, breakLen, countdown, setCountdown}) {
         Math.floor(countdown/60).toString().padStart(2,0) + ":" + (countdown%60).toString().padStart(2,0)
       }</div>
       <button id="start_stop" onClick={playPause}>Start/Stop</button>
-      <button id="reset">reset</button>
+      <button id="reset" onClick={reset}>reset</button>
     </div>
   );
 }
@@ -89,14 +106,15 @@ function MainDisplay({sessionLen, breakLen, countdown, setCountdown}) {
 function App() {
   const [sessionLen, setSessionLen] = useState(25);
   const [breakLen, setBreakLen] = useState(5);
-  const [countdown, setCountdown] = useState(250)
+  const [countdown, setCountdown] = useState(25*60)
+  const [workOrBreak, setworkOrBreak] = useState("W")
 
   return (
     <div className="App">
       <header>productivity clock</header>
       <SessionSelector sessionLen={sessionLen} setSessionLen={setSessionLen}/>
       <BreakSelector breakLen={breakLen} setBreakLen={setBreakLen}/>
-      <MainDisplay sessionLen={sessionLen} breakLen={breakLen} countdown={countdown} setCountdown={setCountdown}/>
+      <MainDisplay sessionLen={sessionLen} breakLen={breakLen} countdown={countdown} setCountdown={setCountdown} workOrBreak={workOrBreak} setworkOrBreak={setworkOrBreak}/>
     </div>
   );
 }
