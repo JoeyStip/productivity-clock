@@ -71,9 +71,10 @@ function MainDisplay({setSessionLen, sessionLen, setBreakLen, breakLen, countdow
   useEffect(()=>{
     const interval = setInterval(()=> {
       if(!paused){
+        setCountdown((count) => count-1)
         if(countdown===0){
           if(sessionOrBreak==="Session"){
-            //document.getElementById("beep").play()
+            document.getElementById("beep").play()
             setCountdown(breakLen*60)
             setSessionOrBreak("Break")
           } else {
@@ -82,7 +83,6 @@ function MainDisplay({setSessionLen, sessionLen, setBreakLen, breakLen, countdow
             setSessionOrBreak("Session")
           }
         }
-        setCountdown((count) => count-1)
       }
     }, 1000)
     return () => clearInterval(interval)
