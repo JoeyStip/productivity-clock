@@ -29,17 +29,15 @@ video {
   /*background-color: gray;*/
   overflow: hidden;
   z-index: 2;
-  /*display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;*/
+  font-family: "Courier New", Courier, monospace;
 }
 
 .blob {
   background-color: white;
   border-radius: 15px;
   padding: 10px;
-  border: 2px black solid;
+  border: 1px black solid;
+  box-shadow: 10px 5px 5px;
 }
 
 header {
@@ -49,6 +47,23 @@ header {
   top: 220px;
   left: 50%;
   transform: translateX(-50%);
+}
+
+button {
+  border-radius: 50px;
+  font-family: "Courier New", Courier, monospace;
+  background: rgb(131, 58, 180);
+  /*background: linear-gradient(209deg, rgba(131,58,180,1) 0%, rgba(253,29,29,0.586374695863747) 50%, rgba(252,176,69,1) 100%);*/
+  border: none;
+  height: 35px;
+  width: 95px;
+  transition: all 0.4s;
+}
+
+button:hover {
+  background: rgb(128, 123, 209);
+  /*background: radial-gradient(circle, rgba(128,123,209,1) 0%, rgba(15,207,129,1) 52%, rgba(218,193,17,1) 100%);
+  */
 }
 
 .selectors {
