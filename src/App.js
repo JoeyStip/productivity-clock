@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './index.css';
 import { useEffect } from 'react'
 import sound from './Christmas Sound Effects I Free Download - doorbell.wav'
+import BGvid from "./videoplayback.webm"
 
 function BreakSelector({breakLen, setBreakLen}) {
 
@@ -23,7 +24,7 @@ function BreakSelector({breakLen, setBreakLen}) {
   }
 
   return (
-    <div id="BreakSelector" className='selectors'>
+    <div id="BreakSelector" className='selectors blob'>
       <div id="break-label">Break Length</div>
       <span id="break-length">{breakLen}</span>
       <button id="break-increment" onClick={breakHandleClick}>up</button>
@@ -38,7 +39,6 @@ function SessionSelector({sessionLen, setSessionLen, setCountdown}) {
     switch(e.target.id){
       case "session-increment":
         if(sessionLen<60){
-          document.getElementById("beep").play()
           setSessionLen(sessionLen + 1)
           setCountdown((sessionLen+1)*60)
         }
@@ -55,7 +55,7 @@ function SessionSelector({sessionLen, setSessionLen, setCountdown}) {
   }
 
   return (
-    <div id="SessionSelector" className='selectors'>
+    <div id="SessionSelector" className='selectors blob'>
       <div id="session-label">Session Length</div>
       <span id="session-length">{sessionLen}</span>
       <button id="session-increment" onClick={sessionHandleClick}>up</button>
@@ -102,7 +102,7 @@ function MainDisplay({setSessionLen, sessionLen, setBreakLen, breakLen, countdow
   }
 
   return (
-    <div id="mainDisplay">
+    <div id="mainDisplay" className='blob'>
       <audio id="beep" src={sound} type="audio/mpeg"></audio>
       <div id="timer-label">{sessionOrBreak}</div>
       <div id="time-left">{
@@ -122,7 +122,10 @@ function App() {
 
   return (
     <div className="App">
-      <header>productivity clock</header>
+      <video loop autoPlay muted>
+        <source src={BGvid} type="video/webm"></source>
+      </video>
+      <header className='blob'>25 + 5 Clock</header>
       <SessionSelector sessionLen={sessionLen} setSessionLen={setSessionLen} setCountdown={setCountdown}/>
       <BreakSelector breakLen={breakLen} setBreakLen={setBreakLen}/>
       <MainDisplay sessionLen={sessionLen} setSessionLen={setSessionLen} breakLen={breakLen} setBreakLen={setBreakLen} countdown={countdown} setCountdown={setCountdown} setSessionOrBreak={setSessionOrBreak} sessionOrBreak={sessionOrBreak}/>
