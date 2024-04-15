@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import './index.css';
 import { useEffect } from 'react'
+import sound from './Christmas Sound Effects I Free Download - doorbell.wav'
 
 function BreakSelector({breakLen, setBreakLen}) {
 
@@ -31,18 +32,21 @@ function BreakSelector({breakLen, setBreakLen}) {
   )
 }
 
-function SessionSelector({sessionLen, setSessionLen}) {
+function SessionSelector({sessionLen, setSessionLen, setCountdown}) {
 
   function sessionHandleClick(e) {
     switch(e.target.id){
       case "session-increment":
         if(sessionLen<60){
+          document.getElementById("beep").play()
           setSessionLen(sessionLen + 1)
+          setCountdown((sessionLen+1)*60)
         }
         break;
       case "session-decrement":
         if(sessionLen>1){
           setSessionLen(sessionLen - 1)
+          setCountdown((sessionLen-1)*60)
         }
         break;
       default:
@@ -62,40 +66,45 @@ function SessionSelector({sessionLen, setSessionLen}) {
 
 let paused = true
 
-function MainDisplay({setSessionLen, sessionLen, setBreakLen, breakLen, countdown, setCountdown, workOrBreak, setworkOrBreak}) {
+function MainDisplay({setSessionLen, sessionLen, setBreakLen, breakLen, countdown, setCountdown, setSessionOrBreak, sessionOrBreak}) {
   
   useEffect(()=>{
     const interval = setInterval(()=> {
       if(!paused){
         if(countdown===0){
-          if(workOrBreak==="W"){
+          if(sessionOrBreak==="Session"){
+            //document.getElementById("beep").play()
             setCountdown(breakLen*60)
-            setworkOrBreak("B")
+            setSessionOrBreak("Break")
           } else {
+            document.getElementById("beep").play()
             setCountdown(sessionLen*60)
-            setworkOrBreak("W")
+            setSessionOrBreak("Session")
           }
         }
         setCountdown((count) => count-1)
       }
     }, 1000)
     return () => clearInterval(interval)
-  }, [setCountdown, countdown, breakLen, sessionLen, workOrBreak, setworkOrBreak]);
+  }, [setCountdown, countdown, breakLen, sessionLen, sessionOrBreak, setSessionOrBreak]);
 
   const playPause = () => {
     paused = !paused
   };
   
   const reset = () => {
+    document.getElementById("beep").load(0)
     setSessionLen(25)
     setBreakLen(5)
     setCountdown(25*60)
+    setSessionOrBreak("Session")
     paused = true
   }
 
   return (
     <div id="mainDisplay">
-      <div id="timer-label">Session</div>
+      <audio id="beep" src={sound} type="audio/mpeg"></audio>
+      <div id="timer-label">{sessionOrBreak}</div>
       <div id="time-left">{
         Math.floor(countdown/60).toString().padStart(2,0) + ":" + (countdown%60).toString().padStart(2,0)
       }</div>
@@ -109,14 +118,14 @@ function App() {
   const [sessionLen, setSessionLen] = useState(25);
   const [breakLen, setBreakLen] = useState(5);
   const [countdown, setCountdown] = useState(25*60)
-  const [workOrBreak, setworkOrBreak] = useState("W")
+  const [sessionOrBreak, setSessionOrBreak] = useState("Session")
 
   return (
     <div className="App">
       <header>productivity clock</header>
-      <SessionSelector sessionLen={sessionLen} setSessionLen={setSessionLen}/>
+      <SessionSelector sessionLen={sessionLen} setSessionLen={setSessionLen} setCountdown={setCountdown}/>
       <BreakSelector breakLen={breakLen} setBreakLen={setBreakLen}/>
-      <MainDisplay sessionLen={sessionLen} setSessionLen={setSessionLen} breakLen={breakLen} setBreakLen={setBreakLen} countdown={countdown} setCountdown={setCountdown} workOrBreak={workOrBreak} setworkOrBreak={setworkOrBreak}/>
+      <MainDisplay sessionLen={sessionLen} setSessionLen={setSessionLen} breakLen={breakLen} setBreakLen={setBreakLen} countdown={countdown} setCountdown={setCountdown} setSessionOrBreak={setSessionOrBreak} sessionOrBreak={sessionOrBreak}/>
     </div>
   );
 }
