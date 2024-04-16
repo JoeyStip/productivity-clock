@@ -27,8 +27,8 @@ function BreakSelector({breakLen, setBreakLen}) {
     <div id="BreakSelector" className='selectors blob'>
       <div id="break-label">Break Length</div>
       <span id="break-length">{breakLen}</span>
-      <button id="break-increment" onClick={breakHandleClick}>up</button>
-      <button id="break-decrement" onClick={breakHandleClick}>down</button>
+      <button className='arrow' id="break-increment" onClick={breakHandleClick}><span>&#8679;</span></button>
+      <button className='arrow' id="break-decrement" onClick={breakHandleClick}><span>&#8681;</span></button>
     </div>
   )
 }
@@ -58,8 +58,8 @@ function SessionSelector({sessionLen, setSessionLen, setCountdown}) {
     <div id="SessionSelector" className='selectors blob'>
       <div id="session-label">Session Length</div>
       <span id="session-length">{sessionLen}</span>
-      <button id="session-increment" onClick={sessionHandleClick}>up</button>
-      <button id="session-decrement" onClick={sessionHandleClick}>down</button>
+      <button className='arrow' id="session-increment" onClick={sessionHandleClick}><span>&#8679;</span></button>
+      <button className='arrow' id="session-decrement" onClick={sessionHandleClick}><span>&#8681;</span></button>
     </div>
   )
 }
@@ -108,8 +108,8 @@ function MainDisplay({setSessionLen, sessionLen, setBreakLen, breakLen, countdow
       <div id="time-left">{
         Math.floor(countdown/60).toString().padStart(2,0) + ":" + (countdown%60).toString().padStart(2,0)
       }</div>
-      <button id="start_stop" onClick={playPause}>Start/Stop</button>
-      <button id="reset" onClick={reset}>reset</button>
+      <button className="main" id="start_stop" onClick={playPause}>Start/Stop</button>
+      <button className="main" id="reset" onClick={reset}>reset</button>
     </div>
   );
 }
