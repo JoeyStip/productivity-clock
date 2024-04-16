@@ -27,8 +27,8 @@ function BreakSelector({breakLen, setBreakLen}) {
     <div id="BreakSelector" className='selectors blob'>
       <div id="break-label">Break Length</div>
       <span id="break-length">{breakLen}</span>
-      <button className='arrow' id="break-increment" onClick={breakHandleClick}><span>&#8679;</span></button>
-      <button className='arrow' id="break-decrement" onClick={breakHandleClick}><span>&#8681;</span></button>
+      <button className='arrow' id="break-increment" onClick={breakHandleClick}>&#8679;</button>
+      <button className='arrow' id="break-decrement" onClick={breakHandleClick}>&#8681;</button>
     </div>
   )
 }
@@ -58,8 +58,8 @@ function SessionSelector({sessionLen, setSessionLen, setCountdown}) {
     <div id="SessionSelector" className='selectors blob'>
       <div id="session-label">Session Length</div>
       <span id="session-length">{sessionLen}</span>
-      <button className='arrow' id="session-increment" onClick={sessionHandleClick}><span>&#8679;</span></button>
-      <button className='arrow' id="session-decrement" onClick={sessionHandleClick}><span>&#8681;</span></button>
+      <button className='arrow' id="session-increment" onClick={sessionHandleClick}>&#8679;</button>
+      <button className='arrow' id="session-decrement" onClick={sessionHandleClick}>&#8681;</button>
     </div>
   )
 }

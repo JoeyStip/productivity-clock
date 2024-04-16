@@ -84,8 +84,6 @@ button {
 
 button:hover {
   background: #ffb703;
-  /*background: radial-gradient(circle, rgba(128,123,209,1) 0%, rgba(15,207,129,1) 52%, rgba(218,193,17,1) 100%);
-  */
 }
 
 .selectors {
