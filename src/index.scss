@@ -3,18 +3,6 @@
     margin:0;
 }
 
-html {
-    padding:0;
-    margin: 0;
-}
-
-body {
-    overflow: hidden;
-    position: absolute;
-    top:0;
-    left:0;
-}
-
 video {
     position:absolute;
     z-index:0;
@@ -22,7 +10,6 @@ video {
     height:100vh;
     object-fit: cover;
     margin:0;
-    padding:0;
     top:0px;
     left:0px;
     border:none;
@@ -30,25 +17,33 @@ video {
 }
 
 .App{
-    position:absolute;
+    display:inline-grid;
+    grid-template-columns: auto;
+    grid-template-rows: 120px 175px 195px;
+    grid-gap:15px;
     width:100vw;
     height: 100vh;
     margin:0;
     padding:0;
     overflow: hidden;
     z-index: 2;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    justify-content: space-evenly;
+    align-content: center;
 }
 
-#tag {
+.tag {
     font-size: small;
     font-weight: 500;
     position:relative;
-    top:25px;
+    top:35px;
+}
+.credits {
+    font-size: small;
+    top:40px;
 }
 
 .blob {
-    
     background-color: white;
     border-radius: 15px;
     padding: 10px;
@@ -56,12 +51,14 @@ video {
 }
 
 header {
+    grid-column: 1 / span 2;
     font-size: 69px;
     white-space: nowrap;
-    position: absolute;
-    top: 220px;
-    left: 50%;
-    transform: translateX(-50%);
+    position: relative;
+    height:fit-content;
+    width: fit-content;
+    margin: 0 auto;
+    /*transform: translateX(-50%);*/
 }
 
 button {
@@ -90,16 +87,18 @@ button:hover {
 }
 
 #SessionSelector {
-    left: 66%;
+    
 }
 
 #BreakSelector {
-    left: 33%;
+    
 }
 
 .selectors { 
-    position: absolute;
-    top: 37%;
+    position:relative;
+    height:175px;
+    width: 250px;
+    /*top: 37%;*/
     font-size: 35px;
     display: grid;
     grid-template-columns: auto auto;
@@ -107,7 +106,7 @@ button:hover {
     button {
         margin: 0 auto;
     }
-    transform: translateX(-50%);
+    /*transform: translateX(-50%);*/
     div {
         margin: 0 auto;
         grid-column: 1/ span 2; 
@@ -119,18 +118,20 @@ button:hover {
 } 
 
 #mainDisplay { 
-    position: absolute; 
+    /*position: absolute; 
     top: 65%; 
-    left:50%; 
-    transform: translate(-50%, -50%); 
+    left:50%;
+    transform: translate(-50%, -50%);*/ 
+    grid-column: 1 / span 2;
     padding: 10px; 
-    width: 25%; 
-    height: 20%; 
+    width: fit-content; 
+    height: 180px; 
     display: flex; 
     justify-content: center; 
     align-items: center; 
     flex-direction: column; 
     font-size: 55px; 
+    margin: 0 auto;
 } 
 
 button:hover { 

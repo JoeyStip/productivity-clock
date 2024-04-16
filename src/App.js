@@ -110,7 +110,8 @@ function MainDisplay({setSessionLen, sessionLen, setBreakLen, breakLen, countdow
       }</div>
       <button className="main" id="start_stop" onClick={playPause}>Start/Stop</button>
       <button className="main" id="reset" onClick={reset}>reset</button>
-      <span id="tag">By Joey Stipich</span>
+      <span className="tag">By Joey Stipich</span>
+      <span className="tag credits">Background visuals by Chokchai Love King from "Amazing Nature"</span>
     </div>
   );
 }
