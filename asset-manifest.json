@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.6b3a0f66.css",
+    "main.js": "/static/js/main.e1c6e6d2.js",
+    "static/js/453.88483b6f.chunk.js": "/static/js/453.88483b6f.chunk.js",
+    "static/media/AmazingNatureChokchai.webm": "/static/media/AmazingNatureChokchai.7d07828fa5b9e8f2608a.webm",
+    "static/media/Christmas Sound Effects I Free Download - doorbell.wav": "/static/media/Christmas Sound Effects I Free Download - doorbell.03526581809816cc3adc.wav",
+    "index.html": "/index.html",
+    "main.6b3a0f66.css.map": "/static/css/main.6b3a0f66.css.map",
+    "main.e1c6e6d2.js.map": "/static/js/main.e1c6e6d2.js.map",
+    "453.88483b6f.chunk.js.map": "/static/js/453.88483b6f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.6b3a0f66.css",
+    "static/js/main.e1c6e6d2.js"
+  ]
+}
