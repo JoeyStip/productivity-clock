@@ -110,6 +110,7 @@ function MainDisplay({setSessionLen, sessionLen, setBreakLen, breakLen, countdow
       }</div>
       <button className="main" id="start_stop" onClick={playPause}>Start/Stop</button>
       <button className="main" id="reset" onClick={reset}>reset</button>
+      <span id="tag">By Joey Stipich</span>
     </div>
   );
 }
